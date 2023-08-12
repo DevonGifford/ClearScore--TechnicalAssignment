@@ -1,0 +1,37 @@
+import { X } from "lucide-react";
+import { Button } from "../ui/button";
+
+interface ModalProps {
+  open: boolean;
+  onClose: () => void; // Change the type to a function
+  children: React.ReactNode;
+}
+
+export default function Modal({ open, onClose, children }: ModalProps) {
+  return (
+    //backdrop
+    <div
+      onClick={onClose}
+      className={`fixed inset-0 flex justify-center items-center transition-colors
+        ${open ? "visible bg-primary/50" : "invisible"}`}
+    >
+      {/* modal */}
+      <div
+        onClick={(e) => {
+          e.stopPropagation();
+        }}
+        className={`bg-secondary w-[50%] h-[50%] rounded-xl shadow-xl p-6 transition-all border-primary
+          ${open ? "scale-100 opacity-100" : "scale-125 opacity-0"}`}
+      >
+        <Button
+          size={"icon"}
+          onClick={onClose}
+          className="bg-secondary h-6 w-6 absolute top-3 right-3 p-1 rounded-lg text-gray-400 hover:bg-inherit "
+        >
+          <X size={16} className="transition duration-400 hover:scale-125" />
+        </Button>
+        {children}
+      </div>
+    </div>
+  );
+}
