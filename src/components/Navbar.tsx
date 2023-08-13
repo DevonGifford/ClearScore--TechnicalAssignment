@@ -6,7 +6,11 @@ import { Button } from "./ui/button";
 import NewIdeaModal from "./theme/theme-modal";
 import IdeaForm from "./IdeaForm";
 
-const Navbar = () => {
+interface NavBarProps {
+  handleCreateIdea: () => void;
+}
+
+const Navbar: React.FC<NavBarProps> = ({ handleCreateIdea }) => {
   const [open, setOpen] = useState(false);
 
   const closeNewIdeaModal = () => {
@@ -36,7 +40,10 @@ const Navbar = () => {
         </div>
       </div>
       <NewIdeaModal open={open} onClose={() => setOpen(false)}>
-        <IdeaForm closeFormModal={closeNewIdeaModal} />
+        <IdeaForm
+          closeFormModal={closeNewIdeaModal}
+          handleCreateIdea={handleCreateIdea}
+        />
       </NewIdeaModal>
     </>
   );

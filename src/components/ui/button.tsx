@@ -20,6 +20,8 @@ const buttonVariants = cva(
         link: "text-primary underline-offset-4 hover:underline",
         premium:
           "bg-gradient-to-r from-sky-500 via-blue-500 to-cyan-500 text-white border-0",
+        premiumCircle:
+          "bg-gradient-to-r from-sky-500 via-blue-500 to-cyan-500 text-white border-0 rounded-full",
       },
       size: {
         default: "h-8 px-4 py-2",

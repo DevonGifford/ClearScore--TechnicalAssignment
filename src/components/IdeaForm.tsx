@@ -15,6 +15,7 @@ type FormSchemaType = z.infer<typeof formSchema>;
 
 interface IdeaFormProps {
   closeFormModal: () => void;
+  handleCreateIdea: () => void;
 }
 
 const IdeaForm = ({ closeFormModal }: IdeaFormProps) => {
@@ -37,6 +38,7 @@ const IdeaForm = ({ closeFormModal }: IdeaFormProps) => {
     // Generate lazy unique key
     const lazyKey = new Date().toISOString();
     //console.log("lazyuniqueID: ", lazyKey);
+    
     // Get the current date in "YYYY-MM-DD" format
     const currentDate = lazyKey.split("T")[0];
 
@@ -55,10 +57,10 @@ const IdeaForm = ({ closeFormModal }: IdeaFormProps) => {
     // Update the localStorage
     localStorage.setItem("ideas", JSON.stringify(existingData));
     //console.log(existingData);
-    localStorage.setItem("another test", JSON.stringify(existingData));
 
     // Close the modal after submit
     closeFormModal();
+    window.location.reload();
   };
 
   return (
