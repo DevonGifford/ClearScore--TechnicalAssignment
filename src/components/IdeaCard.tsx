@@ -1,12 +1,11 @@
-// import { FormEvent } from "react";
 import * as z from "zod";
+import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 
-import { Button } from "./ui/button";
 import { Trash2, Wand2 } from "lucide-react";
+import { Button } from "./ui/button";
 import { Progress } from "./ui/progress";
-import { useState } from "react";
 
 interface CardProps {
   created: string;
@@ -51,16 +50,16 @@ const Card2: React.FC<CardProps> = ({
     handleEditIdea(index, data.title, data.description);
     setEditsMade(false);
   };
+  
 
   return (
-    <div className=" h-90 min-h-fit w-64 px-3 py-3 border-b border-primary/10 bg-secondary transition duration-400 hover:scale-110 hover:bg-secondary/80 flex flex-col hover:drop-shadow-2xl rounded-lg">
+    <div className=" h-90 min-h-fit w-64 px-3 py-3 border-b border-primary/10 bg-secondary transition duration-400 hover:scale-110 hover:bg-secondary/80 flex flex-col rounded-lg">
       {/* HEADER */}
       <div className="w-full flex justify-between ">
         {/* DATE */}
         <div className="text-xs font-bold text-gray-500">
           {edited !== "" ? <p>Edited: {edited}</p> : <p>Created: {created}</p>}
         </div>
-        {/* 🎯 created at and edited @ conditional */}
 
         {/* DELETE */}
         <div>
@@ -68,7 +67,7 @@ const Card2: React.FC<CardProps> = ({
             variant={"destructive"}
             size={"icon"}
             className="h-6 w-6 "
-            onClick={handleDeleteIdea} // 🎯  ADD DELETE FUNCTIONALITY
+            onClick={handleDeleteIdea}
           >
             <Trash2 size={14} />
           </Button>
@@ -84,7 +83,7 @@ const Card2: React.FC<CardProps> = ({
         <div className="border-b-2 border-primary p-2 text-lg font-semibold text-center">
           <textarea
             id="title"
-            className="bg-secondary text-center text-clip resize-none overflow-hidden hover:overflow-auto"
+            className="bg-secondary text-center w-full resize-none overflow-hidden hover:overflow-auto"
             placeholder="Write your title here"
             defaultValue={title}
             {...register("title")}
@@ -108,7 +107,7 @@ const Card2: React.FC<CardProps> = ({
             onChange={(e) => {
               const newDescription = e.target.value;
               setCharCount(newDescription.length);
-              handleEditIdea(index, title, newDescription); // Update the edited description
+              // handleEditIdea(index, title, newDescription); // Update the edited description
               setEditsMade(true);
             }}
           />
@@ -122,12 +121,19 @@ const Card2: React.FC<CardProps> = ({
         {/* CHARACTER COUNTER */}
         {editsMade && ( //Only show the character counter if edits have been made
           <div>
-            <Progress className=" w-full" value={(description.length / 140) * 100} />    {/* 🎯fix this */}
+            <Progress
+              className=" w-full"
+              value={(charCount / 140) * 100}
+            />{" "}
+            {/* 🎯fix this */}
             <div className="flex justify-end text-xs font-bold text-gray-500">
-              {charCount !== 0 ? <span>{140 - charCount}</span> : <span>{140 - description.length}</span>}
+              {charCount !== 0 ? (
+                <span>{140 - charCount}</span>
+              ) : (
+                <span>{140 - description.length}</span>
+              )}
             </div>
           </div>
-
         )}
 
         {/* SUBMIT BUTTON */}

@@ -32,7 +32,7 @@ const Navbar: React.FC<NavBarProps> = ({ handleCreateIdea }) => {
             size="default"
             variant="premium"
             className="mt-1"
-            onClick={() => setOpen(true)} //🎯 +Idea functionality
+            onClick={() => setOpen(true)}
           >
             <CopyPlus className="h-5 w-5 mr-2" /> NEW IDEA
           </Button>

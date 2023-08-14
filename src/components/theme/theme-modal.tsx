@@ -20,7 +20,7 @@ export default function Modal({ open, onClose, children }: ModalProps) {
         onClick={(e) => {
           e.stopPropagation();
         }}
-        className={`bg-secondary w-[50%] h-[50%] rounded-xl shadow-xl p-6 transition-all border-primary
+        className={`bg-secondary w-[85%] h-[36rem%] md:w-[50%] md:h-[55%] lg:w-[40rem] lg:h-[40rem] rounded-xl shadow-xl p-6 transition-all border-primary
           ${open ? "scale-100 opacity-100" : "scale-125 opacity-0"}`}
       >
         <Button

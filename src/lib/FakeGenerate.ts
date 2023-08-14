@@ -5,4 +5,7 @@
 //import tempIdeaData from "../assets/tempIdeaData.json";
 import tempData from "../assets/FakeIdeaData.json";
 
-localStorage.setItem("ideas", JSON.stringify(tempData));
+export default function generateIdeas() {
+  const fakeIdeaData = tempData;
+  localStorage.setItem("ideas", JSON.stringify(fakeIdeaData));
+}

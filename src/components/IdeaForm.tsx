@@ -1,8 +1,10 @@
 import * as z from "zod";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "./ui/button";
 import { Wand2 } from "lucide-react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import generateIdeas from "@/lib/FakeGenerate";
+import { toast } from "react-hot-toast";
 
 const formSchema = z.object({
   title: z.string().min(1, "Title is required"),
@@ -19,7 +21,9 @@ interface IdeaFormProps {
 }
 
 const IdeaForm = ({ closeFormModal }: IdeaFormProps) => {
-  //const { toast } = useToast();
+  //🎯 const { toast } = useToast();
+
+  //✅ Form validation
   const {
     register,
     handleSubmit,
@@ -28,71 +32,72 @@ const IdeaForm = ({ closeFormModal }: IdeaFormProps) => {
     resolver: zodResolver(formSchema),
   });
 
+  //✅ Submit New Idea
   const onSubmit: SubmitHandler<FormSchemaType> = (data) => {
     const existingDataString = localStorage.getItem("ideas");
     const existingData = existingDataString
       ? JSON.parse(existingDataString)
       : [];
-    //console.log("existing data: ", existingData);
 
-    // Generate lazy unique key
+    // Generate lazy unique key & current date
     const lazyKey = new Date().toISOString();
-    //console.log("lazyuniqueID: ", lazyKey);
-    
-    // Get the current date in "YYYY-MM-DD" format
     const currentDate = lazyKey.split("T")[0];
 
-    // Manipulate the data
+    // Update existing data w/ new entry & update the localStorage
     const newData = {
       unique_key: lazyKey,
       created_at: currentDate,
-      edited_at: "", // Initialize empty edited_at date
-      ...data, // Spread the submitted form data
+      edited_at: "",
+      ...data,
     };
-
-    // Update existing data with the new entry
     existingData.push(newData);
-    //console.log(newData);
-
-    // Update the localStorage
     localStorage.setItem("ideas", JSON.stringify(existingData));
-    //console.log(existingData);
+    // Close the modal and refresh after submit
+    closeFormModal();
+    toast.success("New Idea Created");  //🎯 This isn't working properly - need to fix
+    window.location.reload();
+  };
 
-    // Close the modal after submit
+  //✅ Generate Fake Ideas
+  const generateFakeIdeas = () => {
+    toast.success("Fake Ideas Successfully Generated")  //🎯 This isn't working properly - need to fix
+    generateIdeas();
     closeFormModal();
     window.location.reload();
   };
 
   return (
-    <div className="h-full p-4 space-y-2 max-w-3xl mx-auto">
-      {/* Heading */}
-      <div className="space-y-2 w-full col-span-2">
-        <h3 className="text-xl font-bold">Create your New Idea Card</h3>
-        <p className="text-sm text-muted-foreground">
+    <div className="h-full p-1 md:p-4 md:space-y-2 max-w-3xl mx-auto">
+      {/* HEADER */}
+      <div className="md:space-y-2 w-full pb-4">
+        <h3 className="md:text-xl font-bold">Create Your New Idea Card</h3>
+        <p className="text-xs text-muted-foreground md:pb-2">
           Capture your brilliant ideas
         </p>
       </div>
       {/* Form Inputs */}
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-8 pb-10">
-        <div className="flex flex-col space-y-10">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="space-y-2 md:space-y-8 pb-10"
+      >
+        <div className="flex flex-col space-y-2 md:space-y-5">
           {/* HEADING  */}
           <div>
-            <label htmlFor="title" className="">
-              <h5 className="text-base font-medium">The Title</h5>
-              <p className="text-sm text-muted-foreground">
-                Give your idea a catchy and meaningful title that summarizes its
-                essence.{" "}
+            <label htmlFor="title">
+              <h5 className="text-sm md:text-base font-medium">The Title</h5>
+              <p className="text-xs md:text-sm text-muted-foreground pb-2">
+                Give your idea a catchy and meaningful title{" "}
               </p>
             </label>
             <input
               type="text"
               id="title"
-              className=" bg-slate-300 text-black sm:text-sm rounded-lg block w-full p-2.5"
+              className=" bg-slate-300 text-black text-xs sm:text-sm rounded-lg block w-full p-2.5"
               placeholder="Write your title here"
               {...register("title")}
             />
             {errors.title && (
-              <span className="text-red-800 block mt-2">
+              <span className="text-xs text-center md:text-base text-red-800 block mt-1">
                 {errors.title?.message}
               </span>
             )}
@@ -101,30 +106,30 @@ const IdeaForm = ({ closeFormModal }: IdeaFormProps) => {
           {/* DESCRIPTION */}
           <div>
             <label htmlFor="description">
-              <h5 className="text-base font-medium">The Description</h5>
-              <p className="text-sm text-muted-foreground">
-                Short and clear description of your idea, highlighting{" "}
+              <h5 className="text-sm md:text-base font-medium">
+                The Description
+              </h5>
+              <p className="text-xs md:text-sm text-muted-foreground pb-2">
+                Short and clear description of your idea{" "}
               </p>
             </label>
             <input
               type="text"
               id="description"
-              className=" bg-slate-300 text-black sm:text-sm rounded-lg block w-full p-2.5 h-24 whitespace-pre-wrap"
+              className=" bg-slate-300 text-black text-xs sm:text-sm rounded-lg block w-full p-2.5 h-24 whitespace-pre-wrap"
               placeholder="Write your description here"
               {...register("description")}
             />
             {errors.description && (
-              <span className="text-red-800 block mt-2">
+              <span className="text-xs text-center md:text-base text-red-800 block mt-1">
                 {errors.description?.message}
               </span>
             )}
           </div>
         </div>
 
-        {/* PROGRESS BAR */}
-
         {/* SUBMIT BUTTON */}
-        <div className="w-full flex justify-center">
+        <div className="w-full flex justify-center pt-2">
           <Button
             size="lg"
             variant="premium"
@@ -135,6 +140,18 @@ const IdeaForm = ({ closeFormModal }: IdeaFormProps) => {
           </Button>
         </div>
       </form>
+
+      {/* GENERATE FAKE IDEA'S BUTTON */}
+      <div className="w-full flex justify-center">
+        <Button
+          size="sm"
+          variant="default"
+          disabled={isSubmitting}
+          onClick={generateFakeIdeas}
+        >
+          <span>Generate Fake Ideas</span> <Wand2 className="w-4 h-4 ml-2" />
+        </Button>
+      </div>
     </div>
   );
 };
