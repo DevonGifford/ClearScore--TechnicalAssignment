@@ -23,7 +23,7 @@
   {
     "unique_key": "idea_3",
     "title": "Garden Automation System",
-    "description": "An automated gardening system that monitors soil conditions, weather forecasts, and plant growth to optimize watering, fertilization, and care.",
+    "description": "Automated gardening system that monitors soil conditions, weather forecasts & plant growth to optimize watering, fertilization & care.",
     "created_at": "2022-03-07",
     "edited_at": ""
   },
@@ -37,35 +37,35 @@
   {
     "unique_key": "idea_5",
     "title": "Virtual Reality Tourism",
-    "description": "A virtual tourism platform that allows users to explore famous landmarks and travel destinations around the world through immersive VR experiences.",
+    "description": "A virtual tourism platform that allows users to explore famous landmarks and travel destinations around the world through immersive VR.",
     "created_at": "2022-03-12",
     "edited_at": ""
   },
   {
     "unique_key": "idea_6",
     "title": "Mindful Productivity App",
-    "description": "An app that combines task management with mindfulness techniques, helping users stay focused, reduce stress, and accomplish their goals effectively.",
+    "description": "An app that combines task management with mindfulness techniques, helping users stay focused, reduce stress, and accomplish their goals.",
     "created_at": "2022-03-13",
     "edited_at": ""
   },
   {
     "unique_key": "idea_7",
     "title": "AR-Based Learning for Kids",
-    "description": "An augmented reality learning app that offers interactive lessons, quizzes, and educational games to make learning engaging and fun for children.",
+    "description": "An AR learning app that offers interactive lessons, quizzes, and educational games to make learning engaging and fun for children.",
     "created_at": "2022-04-14",
     "edited_at": "2022-04-14"
   },
   {
     "unique_key": "idea_8",
     "title": "AI-Enhanced Home Security",
-    "description": "A home security system that uses AI to differentiate between normal events and potential threats, sending alerts and enhancing overall safety.",
+    "description": "A home security system using AI to differentiate between normal events and potential threats, sending alerts & enhancing overall safety.",
     "created_at": "2022-04-02",
     "edited_at": "2022-04-13"
   },
   {
     "unique_key": "idea_9",
     "title": "Personalized Meditation Guide",
-    "description": "A meditation app that uses AI to analyze users' stress levels and mood, and then provides customized meditation sessions for relaxation and mindfulness.",
+    "description": "A meditation app that uses AI to analyze users stress levels and mood, and then provides customized meditation sessions.",
     "created_at": "2022-04-01",
     "edited_at": "2022-04-14"
   }
