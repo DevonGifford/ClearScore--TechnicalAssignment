@@ -1,6 +1,7 @@
-import Card2 from "./IdeaCard";
+import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
+import IdeaCard from "./IdeaCard";
 import { Button } from "./ui/button";
-import { useMemo, useState } from "react";
 import {
   ArrowDown10,
   ArrowDownAZ,
@@ -17,7 +18,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
-import toast from "react-hot-toast";
 
 interface Idea {
   unique_key: string;
@@ -34,41 +34,45 @@ interface IdeaBoardProps {
   handleEditIdea: (index: number, title: string, description: string) => void;
 }
 
-const IdeaBoard2: React.FC<IdeaBoardProps> = ({
+const IdeaBoard: React.FC<IdeaBoardProps> = ({
   data,
   handleDeleteIdea,
   handleEditIdea,
   handleCreateIdea,
 }) => {
   //✅ SORT FUNCTIONALITY - sort based on title/date
-  const [sortOrder, setSortOrder] = useState<"" | "date" | "alph" | "alph_rev">(
+  const [sortedData, setSortedData] = useState<Idea[]>(data); // Initialize sortedData with the initial data
+  const [sortType, setSortType] = useState<"" | "date" | "alph" | "alph_rev">(
     "",
   );
-  console.log('here is my raw data slice in the ideaboard :' , data);
-  console.log('here is my data slice in the ideaboard :' , data.slice());
-  
-  const sortedData = useMemo(() => {
-    switch (sortOrder) {
+  useEffect(() => {
+    let sorted = [...data];
+    switch (sortType) {
       case "alph":
-        return data.slice().sort((a, b) => a.title.localeCompare(b.title));
+        sorted = sorted.sort((a, b) => a.title.localeCompare(b.title));
+        break;
       case "alph_rev":
-        return data.slice().sort((a, b) => b.title.localeCompare(a.title));
+        sorted = sorted.sort((a, b) => b.title.localeCompare(a.title));
+        break;
       case "date":
-        return data.slice().sort((a, b) => {
-          //- Compare the createdAt and editedAt dates
-          const dateA = a.edited_at || a.created_at; //- Use editedAt if available, otherwise use createdAt
+        sorted = sorted.sort((a, b) => {
+          const dateA = a.edited_at || a.created_at;
           const dateB = b.edited_at || b.created_at;
           return new Date(dateA).getTime() - new Date(dateB).getTime();
         });
+        break;
       default:
-        return data;
+        break;
     }
-  }, [data, sortOrder]);
+    setSortedData(sorted);
+  }, [data, sortType]);
 
-  const handleSortOrderChange = (newSortOrder: "" | "date" | "alph" | "alph_rev") => {
-    setSortOrder(newSortOrder);
-    toast.success('Sort successfully applied!', {
-      position: 'top-center',
+  const handleSortOrderChange = (
+    newSortOrder: "" | "date" | "alph" | "alph_rev",
+  ) => {
+    setSortType(newSortOrder);
+    toast.success("Sort successfully applied!", {
+      position: "top-center",
     });
   };
 
@@ -87,33 +91,25 @@ const IdeaBoard2: React.FC<IdeaBoardProps> = ({
             <DropdownMenuLabel className="flex justify-center">
               Sort By
             </DropdownMenuLabel>
+
             <DropdownMenuSeparator />
 
-            {/* ADD FUNCTIONALIY TO THE BUTTONS 🎯 */}
-            <DropdownMenuItem
-              onClick={() => handleSortOrderChange("")}
-            >
+            <DropdownMenuItem onClick={() => handleSortOrderChange("")}>
               <Sparkles />
               <div className="pl-5">Default</div>
             </DropdownMenuItem>
 
-            <DropdownMenuItem
-              onClick={() => handleSortOrderChange("alph")}
-            >
+            <DropdownMenuItem onClick={() => handleSortOrderChange("alph")}>
               <ArrowDownAZ />
               <div className="pl-5">Title A-Z</div>
             </DropdownMenuItem>
 
-            <DropdownMenuItem
-              onClick={() => handleSortOrderChange("alph_rev")}
-            >
+            <DropdownMenuItem onClick={() => handleSortOrderChange("alph_rev")}>
               <ArrowUpAZ />
               <div className="pl-5">Title Z-A</div>
             </DropdownMenuItem>
 
-            <DropdownMenuItem
-              onClick={() => handleSortOrderChange("date")}
-            >
+            <DropdownMenuItem onClick={() => handleSortOrderChange("date")}>
               <ArrowDown10 />
               <div className="pl-5">Date </div>
             </DropdownMenuItem>
@@ -139,7 +135,7 @@ const IdeaBoard2: React.FC<IdeaBoardProps> = ({
 
         {/* MAP OVER CARDS */}
         {sortedData.map((item, index) => (
-          <Card2
+          <IdeaCard
             {...item}
             index={index}
             key={item.unique_key}
@@ -158,4 +154,4 @@ const IdeaBoard2: React.FC<IdeaBoardProps> = ({
   );
 };
 
-export default IdeaBoard2;
+export default IdeaBoard;

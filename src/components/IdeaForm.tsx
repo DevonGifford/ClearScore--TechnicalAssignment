@@ -54,13 +54,13 @@ const IdeaForm = ({ closeFormModal }: IdeaFormProps) => {
     localStorage.setItem("ideas", JSON.stringify(existingData));
     // Close the modal and refresh after submit
     closeFormModal();
-    toast.success("New Idea Created");  //🎯 This isn't working properly - need to fix
+    toast.success("New Idea Created"); //🎯 This isn't working properly - need to fix
     window.location.reload();
   };
 
   //✅ Generate Fake Ideas
   const generateFakeIdeas = () => {
-    toast.success("Fake Ideas Successfully Generated")  //🎯 This isn't working properly - need to fix
+    toast.success("Fake Ideas Successfully Generated"); //🎯 This isn't working properly - need to fix
     generateIdeas();
     closeFormModal();
     window.location.reload();

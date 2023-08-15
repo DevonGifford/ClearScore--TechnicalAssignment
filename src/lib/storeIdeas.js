@@ -1,8 +1,4 @@
-/*
-  Pushing the ideas to local storage for tempIdeaData.json development
-*/
-
-//import tempIdeaData from "../assets/tempIdeaData.json";
+// -  Pushing the Test ideas to local storage via html script for development purposes
 import tempData from "../assets/FakeIdeaData.json";
 
 localStorage.setItem("ideas", JSON.stringify(tempData));

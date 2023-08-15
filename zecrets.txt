@@ -1,6 +1,0 @@
-format all files with Prettier:
-
-npx prettier . --write
-
-
-

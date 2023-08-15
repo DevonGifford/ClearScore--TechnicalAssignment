@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import IdeaBoard2 from "./components/IdeaBoard";
+import IdeaBoard from "./components/IdeaBoard";
 import Navbar from "./components/Navbar";
 import toast from "react-hot-toast";
 
@@ -44,8 +44,7 @@ function App() {
     setData(newIdea);
     console.log("New Idea data to be pushed to local storage: ", newIdea); //🤓
     updateLocalStorage(newIdea);
-    toast.success('Successfully created idea!');
-    
+    toast.success("Successfully created idea!");
   };
   //✅ DELETE-IDEA: idea via unique_key, updateState & localStorage
   const handleDeleteIdea = (unique_key: string) => {
@@ -58,7 +57,7 @@ function App() {
       updatedData,
     ); //🤓
     updateLocalStorage(updatedData);
-    toast.success('Successfully deleted!');
+    toast.success("Successfully deleted!");
   };
   //✅ EDIT-IDEA: via input change, updateState & localStorage
   const handleEditIdea = (
@@ -76,14 +75,15 @@ function App() {
     setData(updatedData);
     console.log("Edited data to be pushed to local storage: ", updatedData); //🤓
     updateLocalStorage(updatedData);
-    toast.success('Successfully updated idea!');
-    //🎯 something funky going on when editing the title 
+    toast.success("Successfully updated idea!");
+    //🎯 something funky going on when editing the title
   };
 
   return (
+    //🎯 remove handle create idea function from the navbar
     <div className="h-full">
-      <Navbar handleCreateIdea={handleCreateIdea} />
-      <IdeaBoard2
+      <Navbar handleCreateIdea={handleCreateIdea} /> 
+      <IdeaBoard
         data={data}
         handleDeleteIdea={handleDeleteIdea}
         handleCreateIdea={handleCreateIdea}

@@ -26,7 +26,7 @@ const formSchema = z.object({
 });
 type FormSchemaType = z.infer<typeof formSchema>;
 
-const Card2: React.FC<CardProps> = ({
+const IdeaCard: React.FC<CardProps> = ({
   index,
   created,
   edited,
@@ -50,7 +50,6 @@ const Card2: React.FC<CardProps> = ({
     handleEditIdea(index, data.title, data.description);
     setEditsMade(false);
   };
-  
 
   return (
     <div className=" h-90 min-h-fit w-64 px-3 py-3 border-b border-primary/10 bg-secondary transition duration-400 hover:scale-110 hover:bg-secondary/80 flex flex-col rounded-lg">
@@ -60,7 +59,6 @@ const Card2: React.FC<CardProps> = ({
         <div className="text-xs font-bold text-gray-500">
           {edited !== "" ? <p>Edited: {edited}</p> : <p>Created: {created}</p>}
         </div>
-
         {/* DELETE */}
         <div>
           <Button
@@ -95,7 +93,6 @@ const Card2: React.FC<CardProps> = ({
             </span>
           )}
         </div>
-
         {/* DESCRIPTION */}
         <div className="h-min-[7rem] text-base pt-1 text-center">
           <textarea
@@ -107,7 +104,6 @@ const Card2: React.FC<CardProps> = ({
             onChange={(e) => {
               const newDescription = e.target.value;
               setCharCount(newDescription.length);
-              // handleEditIdea(index, title, newDescription); // Update the edited description
               setEditsMade(true);
             }}
           />
@@ -117,15 +113,10 @@ const Card2: React.FC<CardProps> = ({
             </span>
           )}
         </div>
-
         {/* CHARACTER COUNTER */}
         {editsMade && ( //Only show the character counter if edits have been made
           <div>
-            <Progress
-              className=" w-full"
-              value={(charCount / 140) * 100}
-            />{" "}
-            {/* 🎯fix this */}
+            <Progress className=" w-full" value={(charCount / 140) * 100} />{" "}
             <div className="flex justify-end text-xs font-bold text-gray-500">
               {charCount !== 0 ? (
                 <span>{140 - charCount}</span>
@@ -135,9 +126,7 @@ const Card2: React.FC<CardProps> = ({
             </div>
           </div>
         )}
-
         {/* SUBMIT BUTTON */}
-        {/* Create conditional to show only if edit has happened 🎯 */}
         <div className="flex justify-center pt-1">
           {editsMade && ( // Only show the submit button if edits have been made
             <Button
@@ -155,4 +144,4 @@ const Card2: React.FC<CardProps> = ({
   );
 };
 
-export default Card2;
+export default IdeaCard;
