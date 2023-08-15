@@ -41,7 +41,7 @@ const IdeaBoard: React.FC<IdeaBoardProps> = ({
   handleCreateIdea,
 }) => {
   //✅ SORT FUNCTIONALITY - sort based on title/date
-  const [sortedData, setSortedData] = useState<Idea[]>(data); // Initialize sortedData with the initial data
+  const [sortedData, setSortedData] = useState<Idea[]>(data); //- Initialize sortedData with the initial data
   const [sortType, setSortType] = useState<"" | "date" | "alph" | "alph_rev">(
     "",
   );
@@ -86,29 +86,23 @@ const IdeaBoard: React.FC<IdeaBoardProps> = ({
               <ListFilter className="h-[2rem] w-[2rem]" />
             </Button>
           </DropdownMenuTrigger>
-
           <DropdownMenuContent className="w-30 ml-10">
             <DropdownMenuLabel className="flex justify-center">
               Sort By
             </DropdownMenuLabel>
-
             <DropdownMenuSeparator />
-
             <DropdownMenuItem onClick={() => handleSortOrderChange("")}>
               <Sparkles />
               <div className="pl-5">Default</div>
             </DropdownMenuItem>
-
             <DropdownMenuItem onClick={() => handleSortOrderChange("alph")}>
               <ArrowDownAZ />
               <div className="pl-5">Title A-Z</div>
             </DropdownMenuItem>
-
             <DropdownMenuItem onClick={() => handleSortOrderChange("alph_rev")}>
               <ArrowUpAZ />
               <div className="pl-5">Title Z-A</div>
             </DropdownMenuItem>
-
             <DropdownMenuItem onClick={() => handleSortOrderChange("date")}>
               <ArrowDown10 />
               <div className="pl-5">Date </div>
@@ -116,7 +110,6 @@ const IdeaBoard: React.FC<IdeaBoardProps> = ({
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-
       <div className="flex justify-center flex-row flex-wrap gap-8 pb-10 pt-32 mx-10">
         {/* ADD NEW IDEA */}
         <div className=" mx-14 h-40 min-h-fit w-40 mt-10 px-3 py-3 border-b border-primary/10 bg-secondary transition duration-400 hover:scale-110 hover:bg-secondary/80 flex flex-col hover:shadow-custom rounded-full">
@@ -132,7 +125,6 @@ const IdeaBoard: React.FC<IdeaBoardProps> = ({
             </Button>
           </div>
         </div>
-
         {/* MAP OVER CARDS */}
         {sortedData.map((item, index) => (
           <IdeaCard

@@ -19,14 +19,11 @@ function App() {
     const storedData = localStorage.getItem("ideas");
     if (storedData) {
       setData(JSON.parse(storedData));
-      console.log("Data retrieved from local storage:", storedData); //🤓
     }
   }, [setData]);
   //✅ UPDATE LOCAL STORAGE, with new data
   const updateLocalStorage = (newData: Idea[]) => {
-    console.log("saving to localstorage, new data: ", newData); //🤓
     localStorage.setItem("ideas", JSON.stringify(newData));
-    console.log("data pushed to local storage"); //🤓
   };
   //✅ CREATE-IDEA: new idea, updateState & localStorage
   const handleCreateIdea = () => {
@@ -42,7 +39,6 @@ function App() {
       ...data,
     ];
     setData(newIdea);
-    console.log("New Idea data to be pushed to local storage: ", newIdea); //🤓
     updateLocalStorage(newIdea);
     toast.success("Successfully created idea!");
   };
@@ -52,10 +48,6 @@ function App() {
       (element) => element.unique_key !== unique_key,
     );
     setData(updatedData);
-    console.log(
-      "Post deleted data to be pushed to local storage: ",
-      updatedData,
-    ); //🤓
     updateLocalStorage(updatedData);
     toast.success("Successfully deleted!");
   };
@@ -73,16 +65,14 @@ function App() {
       edited_at: new Date().toISOString().split("T")[0],
     };
     setData(updatedData);
-    console.log("Edited data to be pushed to local storage: ", updatedData); //🤓
     updateLocalStorage(updatedData);
     toast.success("Successfully updated idea!");
-    //🎯 something funky going on when editing the title
   };
 
   return (
     //🎯 remove handle create idea function from the navbar
     <div className="h-full">
-      <Navbar handleCreateIdea={handleCreateIdea} /> 
+      <Navbar handleCreateIdea={handleCreateIdea} />
       <IdeaBoard
         data={data}
         handleDeleteIdea={handleDeleteIdea}

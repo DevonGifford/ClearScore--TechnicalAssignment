@@ -3,13 +3,13 @@ import { Button } from "../ui/button";
 
 interface ModalProps {
   open: boolean;
-  onClose: () => void; // Change the type to a function
+  onClose: () => void;
   children: React.ReactNode;
 }
 
 export default function Modal({ open, onClose, children }: ModalProps) {
   return (
-    //backdrop
+    //-backdrop
     <div
       onClick={onClose}
       className={`fixed inset-0 flex justify-center items-center transition-colors

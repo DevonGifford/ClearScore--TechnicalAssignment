@@ -71,7 +71,6 @@ const IdeaCard: React.FC<CardProps> = ({
           </Button>
         </div>
       </div>
-
       {/* FORM w/ TITLE & DESCRIPTION */}
       <form
         onSubmit={handleSubmit(onSubmit)}
@@ -87,11 +86,7 @@ const IdeaCard: React.FC<CardProps> = ({
             {...register("title")}
             onChange={() => setEditsMade(true)}
           />
-          {errors.title && (
-            <span className=" text-red-700 text-sm">
-              {errors.title?.message}
-            </span>
-          )}
+          {errors.title && (<span className=" text-red-700 text-sm">{errors.title?.message}</span>)}
         </div>
         {/* DESCRIPTION */}
         <div className="h-min-[7rem] text-base pt-1 text-center">
@@ -107,14 +102,10 @@ const IdeaCard: React.FC<CardProps> = ({
               setEditsMade(true);
             }}
           />
-          {errors.description && (
-            <span className=" text-red-700 text-sm">
-              {errors.description?.message}
-            </span>
-          )}
+          {errors.description && (<span className=" text-red-700 text-sm">{errors.description?.message}</span>)}
         </div>
         {/* CHARACTER COUNTER */}
-        {editsMade && ( //Only show the character counter if edits have been made
+        {editsMade && ( //-Only show the character counter if edits have been made
           <div>
             <Progress className=" w-full" value={(charCount / 140) * 100} />{" "}
             <div className="flex justify-end text-xs font-bold text-gray-500">
@@ -128,7 +119,7 @@ const IdeaCard: React.FC<CardProps> = ({
         )}
         {/* SUBMIT BUTTON */}
         <div className="flex justify-center pt-1">
-          {editsMade && ( // Only show the submit button if edits have been made
+          {editsMade && ( //- Only show the submit button if edits have been made
             <Button
               type="submit"
               variant="premium"

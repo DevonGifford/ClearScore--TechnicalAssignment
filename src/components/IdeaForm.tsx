@@ -21,8 +21,6 @@ interface IdeaFormProps {
 }
 
 const IdeaForm = ({ closeFormModal }: IdeaFormProps) => {
-  //🎯 const { toast } = useToast();
-
   //✅ Form validation
   const {
     register,
@@ -38,12 +36,10 @@ const IdeaForm = ({ closeFormModal }: IdeaFormProps) => {
     const existingData = existingDataString
       ? JSON.parse(existingDataString)
       : [];
-
-    // Generate lazy unique key & current date
+    //-Generate lazy unique key & current date
     const lazyKey = new Date().toISOString();
     const currentDate = lazyKey.split("T")[0];
-
-    // Update existing data w/ new entry & update the localStorage
+    //-Update existing data w/ new entry & update the localStorage
     const newData = {
       unique_key: lazyKey,
       created_at: currentDate,
@@ -52,15 +48,14 @@ const IdeaForm = ({ closeFormModal }: IdeaFormProps) => {
     };
     existingData.push(newData);
     localStorage.setItem("ideas", JSON.stringify(existingData));
-    // Close the modal and refresh after submit
+    //-Close the modal and refresh after submit
     closeFormModal();
-    toast.success("New Idea Created"); //🎯 This isn't working properly - need to fix
+    toast.success("New Idea Created");
     window.location.reload();
   };
-
   //✅ Generate Fake Ideas
   const generateFakeIdeas = () => {
-    toast.success("Fake Ideas Successfully Generated"); //🎯 This isn't working properly - need to fix
+    toast.success("Fake Ideas Successfully Generated");
     generateIdeas();
     closeFormModal();
     window.location.reload();
@@ -97,12 +92,8 @@ const IdeaForm = ({ closeFormModal }: IdeaFormProps) => {
               {...register("title")}
             />
             {errors.title && (
-              <span className="text-xs text-center md:text-base text-red-800 block mt-1">
-                {errors.title?.message}
-              </span>
-            )}
+              <span className="text-xs text-center md:text-base text-red-800 block mt-1">{errors.title?.message}</span>)}
           </div>
-
           {/* DESCRIPTION */}
           <div>
             <label htmlFor="description">
@@ -120,14 +111,9 @@ const IdeaForm = ({ closeFormModal }: IdeaFormProps) => {
               placeholder="Write your description here"
               {...register("description")}
             />
-            {errors.description && (
-              <span className="text-xs text-center md:text-base text-red-800 block mt-1">
-                {errors.description?.message}
-              </span>
-            )}
+            {errors.description && (<span className="text-xs text-center md:text-base text-red-800 block mt-1">{errors.description?.message}</span>)}
           </div>
         </div>
-
         {/* SUBMIT BUTTON */}
         <div className="w-full flex justify-center pt-2">
           <Button
@@ -140,7 +126,6 @@ const IdeaForm = ({ closeFormModal }: IdeaFormProps) => {
           </Button>
         </div>
       </form>
-
       {/* GENERATE FAKE IDEA'S BUTTON */}
       <div className="w-full flex justify-center">
         <Button
