@@ -13,7 +13,6 @@ interface Idea {
 
 function App() {
   const [data, setData] = useState<Idea[]>([]);
-
   //✅ Check local storage on component mount
   useEffect(() => {
     const storedData = localStorage.getItem("ideas");
@@ -22,24 +21,23 @@ function App() {
     }
   }, [setData]);
   //✅ UPDATE LOCAL STORAGE, with new data
-  const updateLocalStorage = (newData: Idea[]) => {
-    localStorage.setItem("ideas", JSON.stringify(newData));
-  };
+  useEffect(() => {
+    if (data.length > 0){
+      localStorage.setItem("ideas", JSON.stringify(data));
+    }
+  }, [data]);
   //✅ CREATE-IDEA: new idea, updateState & localStorage
-  const handleCreateIdea = () => {
-    const lazyKey = new Date().toISOString();
-    const newIdea = [
-      {
+  const handleCreateIdea = (title?:string, description?:string) => {
+    const lazyKey = new Date().toISOString();    
+    const newIdea = {
         unique_key: lazyKey,
         edited_at: "",
         created_at: lazyKey.split("T")[0],
-        title: "",
-        description: "",
-      },
-      ...data,
-    ];
-    setData(newIdea);
-    updateLocalStorage(newIdea);
+        title: title || "",
+        description: description || "",
+      };
+    const newData = [ newIdea, ...data];
+    setData(newData);
     toast.success("Successfully created idea!");
   };
   //✅ DELETE-IDEA: idea via unique_key, updateState & localStorage
@@ -48,7 +46,6 @@ function App() {
       (element) => element.unique_key !== unique_key,
     );
     setData(updatedData);
-    updateLocalStorage(updatedData);
     toast.success("Successfully deleted!");
   };
   //✅ EDIT-IDEA: via input change, updateState & localStorage
@@ -65,12 +62,10 @@ function App() {
       edited_at: new Date().toISOString().split("T")[0],
     };
     setData(updatedData);
-    updateLocalStorage(updatedData);
     toast.success("Successfully updated idea!");
   };
 
   return (
-    //🎯 remove handle create idea function from the navbar
     <div className="h-full">
       <Navbar handleCreateIdea={handleCreateIdea} />
       <IdeaBoard

@@ -29,7 +29,7 @@ Tech Used in this Project
 
 <!-- Logo -->
 <div align=center>
-    <img src="/src/assets/fullpage.png" alt="Demo" title="DemoImage" width="380" height="320">     
+    <img src="/src/assets/fullpage.png" alt="Demo" title="DemoImage" width="500" height="300">     
    
 </div>
 
@@ -100,7 +100,7 @@ You can learn more about the task requirements here:<br>
 
 ✅ Utilise the localStorage API to persist current state when the page is refreshed.
 
-✅ Add a character countdown as the user is approaching the limit of their description text.
+✅ Add a character countdown as user is approaching the limit of description text.
 
 ✅ Add an unobtrusive notification when an update is made to a tile.
 
@@ -108,9 +108,9 @@ You can learn more about the task requirements here:<br>
 
 <hr>
 
-✅ Created a Navbar
+✅ Created a Navbar w/ button to generate's new ideas.
 
-✅ Light and Dark Themes
+✅ Light and Dark Theme styling.
 
 ✅ Filter Functionality
 
@@ -139,10 +139,10 @@ _room for improvement in this regard ..._
 _coming soon ..._
 
 ❌ MEN (Mongo, Express, Node) stack websites <br>
-_This proof of concept doesn't have a dedicated backend and instead uses a serverless PostgreSQL database ..._
+_This proof of concept doesn't have a dedicated backend..._
 
 ❌ We build using the Webpack module bundler and Lerna package manager <br/>
-_This app uses vite and thus uses it's own ezbuild bundler/builder ..._
+_This app uses vite and thus uses vite's own ezbuild bundler/builder ..._
 
 </div>
 
@@ -245,11 +245,11 @@ Copy code
 
 <!-- -------------------------------------------------------------------------- -->
 
-<h1 align='center'> Development Thought Process </h1>
+<h1 align='center'> Development Thought-Process 💭</h1>
 
 <!-- -------------------------------------------------------------------------- -->
 
-## <font color=EEE8AA>App.tsx :</font>
+## <font color=EEE8AA>`App.tsx`</font>
 
 <!-- -------------------------------------------------------------------------- -->
 
@@ -257,7 +257,8 @@ Copy code
 <details>
 <summary> Click here to expand </summary>
 <br/>
-### <font color=#d48d57>Separation of concerns</font>
+
+### Separation of concerns
 
 If this were not a technical test I would have most likely had broken the app into smaller focused components.
 But for the sake of a quick & easy code review, it's easier to keep things bundled together.
@@ -291,7 +292,7 @@ Could have a more robust and unique key generation mechanism, however for the sa
 
 <br>
 
-## <font color=EEE8AA>IdeaBoard:</font>
+## <font color=EEE8AA>`IdeaBoard.tsx`</font>
 
 <!-- -------------------------------------------------------------------------- -->
 
@@ -326,7 +327,7 @@ _For example. some things I would take into consideration across the entire app 
 
 <br>
 
-## <font color=EEE8AA>IdeaCard:</font>
+## <font color=EEE8AA>`IdeaCard`</font>
 
 <!-- -------------------------------------------------------------------------- -->
 
@@ -364,7 +365,7 @@ This was relatively quick and easy to implement with the help of the shadcn UI l
 
 <br>
 
-## <font color=EEE8AA> NavBar & NewIdea-Modal:</font>
+## <font color=EEE8AA> `NavBar` & `NewIdea-Modal`:</font>
 
 <!-- -------------------------------------------------------------------------- -->
 

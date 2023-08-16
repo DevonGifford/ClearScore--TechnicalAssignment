@@ -1,4 +1,5 @@
 import * as z from "zod";
+import { formSchema } from "@/lib/zodFormSchema";
 import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -6,6 +7,8 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { Trash2, Wand2 } from "lucide-react";
 import { Button } from "./ui/button";
 import { Progress } from "./ui/progress";
+
+type FormSchemaType = z.infer<typeof formSchema>;
 
 interface CardProps {
   created: string;
@@ -16,15 +19,6 @@ interface CardProps {
   handleDeleteIdea: () => void;
   handleEditIdea: (index: number, title: string, description: string) => void;
 }
-
-const formSchema = z.object({
-  title: z.string().min(1, "Title is required"),
-  description: z
-    .string()
-    .min(1, "Description is required")
-    .max(140, "Maximum of 140 characters"),
-});
-type FormSchemaType = z.infer<typeof formSchema>;
 
 const IdeaCard: React.FC<CardProps> = ({
   index,
@@ -37,7 +31,7 @@ const IdeaCard: React.FC<CardProps> = ({
 }) => {
   const [charCount, setCharCount] = useState(0);
   const [editsMade, setEditsMade] = useState(false);
-
+  //✅ Form validation
   const {
     register,
     handleSubmit,
@@ -45,7 +39,7 @@ const IdeaCard: React.FC<CardProps> = ({
   } = useForm<FormSchemaType>({
     resolver: zodResolver(formSchema),
   });
-
+  //✅ Submit edited Idea
   const onSubmit: SubmitHandler<FormSchemaType> = (data) => {
     handleEditIdea(index, data.title, data.description);
     setEditsMade(false);

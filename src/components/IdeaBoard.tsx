@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import toast from "react-hot-toast";
 import IdeaCard from "./IdeaCard";
 import { Button } from "./ui/button";
@@ -41,40 +41,28 @@ const IdeaBoard: React.FC<IdeaBoardProps> = ({
   handleCreateIdea,
 }) => {
   //✅ SORT FUNCTIONALITY - sort based on title/date
-  const [sortedData, setSortedData] = useState<Idea[]>(data); //- Initialize sortedData with the initial data
-  const [sortType, setSortType] = useState<"" | "date" | "alph" | "alph_rev">(
-    "",
-  );
-  useEffect(() => {
-    let sorted = [...data];
+  const [sortType, setSortType] = useState<"" | "date" | "alph" | "alph_rev">("");
+  const sortedData = (data: Idea[], sortType: string)  => {
     switch (sortType) {
       case "alph":
-        sorted = sorted.sort((a, b) => a.title.localeCompare(b.title));
-        break;
+        return data.sort((a, b) => a.title.localeCompare(b.title));
       case "alph_rev":
-        sorted = sorted.sort((a, b) => b.title.localeCompare(a.title));
-        break;
+        return data.sort((a, b) => b.title.localeCompare(a.title));
       case "date":
-        sorted = sorted.sort((a, b) => {
+        return data.sort((a, b) => {
           const dateA = a.edited_at || a.created_at;
           const dateB = b.edited_at || b.created_at;
           return new Date(dateA).getTime() - new Date(dateB).getTime();
         });
-        break;
       default:
-        break;
-    }
-    setSortedData(sorted);
-  }, [data, sortType]);
-
-  const handleSortOrderChange = (
-    newSortOrder: "" | "date" | "alph" | "alph_rev",
-  ) => {
+        return data.slice();
+    }          
+  }
+  const handleSortOrderChange = (newSortOrder: "" | "date" | "alph" | "alph_rev") => {
     setSortType(newSortOrder);
-    toast.success("Sort successfully applied!", {
-      position: "top-center",
-    });
+    toast.success("Sort successfully applied!", { position: "top-center" });
   };
+  const sortedIdeaData = sortedData(data, sortType); 
 
   return (
     <>
@@ -115,7 +103,7 @@ const IdeaBoard: React.FC<IdeaBoardProps> = ({
         <div className=" mx-14 h-40 min-h-fit w-40 mt-10 px-3 py-3 border-b border-primary/10 bg-secondary transition duration-400 hover:scale-110 hover:bg-secondary/80 flex flex-col hover:shadow-custom rounded-full">
           <div className="w-full flex justify-center items-center mt-1">
             <Button
-              onClick={handleCreateIdea}
+              onClick={() => handleCreateIdea()}
               size="icon"
               variant="premiumCircle"
               className=" rounded-full h-32 w-32"
@@ -126,7 +114,7 @@ const IdeaBoard: React.FC<IdeaBoardProps> = ({
           </div>
         </div>
         {/* MAP OVER CARDS */}
-        {sortedData.map((item, index) => (
+        {sortedIdeaData.map((item, index) => (
           <IdeaCard
             {...item}
             index={index}

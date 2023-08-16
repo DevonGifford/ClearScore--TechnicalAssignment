@@ -5,54 +5,32 @@ import { Button } from "./ui/button";
 import { Wand2 } from "lucide-react";
 import generateIdeas from "@/lib/FakeGenerate";
 import { toast } from "react-hot-toast";
+import { formSchema } from "@/lib/zodFormSchema";
 
-const formSchema = z.object({
-  title: z.string().min(1, "Title is required"),
-  description: z
-    .string()
-    .min(1, "Description is required")
-    .max(140, "Maximum of 140 characters"),
-});
 type FormSchemaType = z.infer<typeof formSchema>;
 
 interface IdeaFormProps {
   closeFormModal: () => void;
-  handleCreateIdea: () => void;
+  handleCreateIdea: (title:string, description:string) => void;
 }
 
-const IdeaForm = ({ closeFormModal }: IdeaFormProps) => {
+const IdeaForm = ({ closeFormModal, handleCreateIdea }: IdeaFormProps) => {
   //✅ Form validation
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors, isSubmitting },
   } = useForm<FormSchemaType>({
     resolver: zodResolver(formSchema),
   });
-
   //✅ Submit New Idea
-  const onSubmit: SubmitHandler<FormSchemaType> = (data) => {
-    const existingDataString = localStorage.getItem("ideas");
-    const existingData = existingDataString
-      ? JSON.parse(existingDataString)
-      : [];
-    //-Generate lazy unique key & current date
-    const lazyKey = new Date().toISOString();
-    const currentDate = lazyKey.split("T")[0];
-    //-Update existing data w/ new entry & update the localStorage
-    const newData = {
-      unique_key: lazyKey,
-      created_at: currentDate,
-      edited_at: "",
-      ...data,
-    };
-    existingData.push(newData);
-    localStorage.setItem("ideas", JSON.stringify(existingData));
-    //-Close the modal and refresh after submit
+  const onSubmit: SubmitHandler<FormSchemaType> = (formData) => {
+    const { title, description } = formData;
+    handleCreateIdea(title, description);
+    reset();
     closeFormModal();
-    toast.success("New Idea Created");
-    window.location.reload();
-  };
+  }
   //✅ Generate Fake Ideas
   const generateFakeIdeas = () => {
     toast.success("Fake Ideas Successfully Generated");
