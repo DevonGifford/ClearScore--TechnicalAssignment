@@ -3,9 +3,9 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "./ui/button";
 import { Wand2 } from "lucide-react";
-import generateIdeas from "@/lib/FakeGenerate";
+import generateIdeas from "../lib/FakeGenerate";
 import { toast } from "react-hot-toast";
-import { formSchema } from "@/lib/zodFormSchema";
+import { formSchema } from "../lib/zodFormSchema";
 
 type FormSchemaType = z.infer<typeof formSchema>;
 

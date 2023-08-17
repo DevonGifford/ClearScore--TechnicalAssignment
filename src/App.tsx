@@ -13,7 +13,7 @@ interface Idea {
 
 function App() {
   const [data, setData] = useState<Idea[]>([]);
-  //✅ Check local storage on component mount
+  //✅ CHECK LOCAL STORAGE, on component mount
   useEffect(() => {
     const storedData = localStorage.getItem("ideas");
     if (storedData) {

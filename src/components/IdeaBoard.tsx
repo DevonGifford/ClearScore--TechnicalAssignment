@@ -103,6 +103,7 @@ const IdeaBoard: React.FC<IdeaBoardProps> = ({
         <div className=" mx-14 h-40 min-h-fit w-40 mt-10 px-3 py-3 border-b border-primary/10 bg-secondary transition duration-400 hover:scale-110 hover:bg-secondary/80 flex flex-col hover:shadow-custom rounded-full">
           <div className="w-full flex justify-center items-center mt-1">
             <Button
+              data-testid="create-idea-button"
               onClick={() => handleCreateIdea()}
               size="icon"
               variant="premiumCircle"
