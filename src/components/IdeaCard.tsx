@@ -10,7 +10,7 @@ import { Progress } from "./ui/progress";
 
 type FormSchemaType = z.infer<typeof formSchema>;
 
-interface CardProps {
+export interface CardProps {
   created: string;
   edited: string;
   title: string;
@@ -69,6 +69,7 @@ const IdeaCard: React.FC<CardProps> = ({
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col justify-center"
+        role="form"
       >
         {/* TITLE */}
         <div className="border-b-2 border-primary p-2 text-lg font-semibold text-center">
