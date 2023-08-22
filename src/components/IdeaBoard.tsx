@@ -70,7 +70,7 @@ const IdeaBoard: React.FC<IdeaBoardProps> = ({
       <div className="absolute translate-y-20 translate-x-10 x-20">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="secondary" size="icon">
+            <Button variant="secondary" size="icon" role="sort-dropdown">
               <ListFilter className="h-[2rem] w-[2rem]" />
             </Button>
           </DropdownMenuTrigger>
@@ -100,13 +100,14 @@ const IdeaBoard: React.FC<IdeaBoardProps> = ({
       </div>
       <div className="flex justify-center flex-row flex-wrap gap-8 pb-10 pt-32 mx-10">
         {/* ADD NEW IDEA */}
-        <div className=" mx-14 h-40 min-h-fit w-40 mt-10 px-3 py-3 border-b border-primary/10 bg-secondary transition duration-400 hover:scale-110 hover:bg-secondary/80 flex flex-col hover:shadow-custom rounded-full">
+        <div data-testid="new-idea-card" className=" mx-14 h-40 min-h-fit w-40 mt-10 px-3 py-3 border-b border-primary/10 bg-secondary transition duration-400 hover:scale-110 hover:bg-secondary/80 flex flex-col hover:shadow-custom rounded-full">
           <div className="w-full flex justify-center items-center mt-1">
             <Button
               onClick={() => handleCreateIdea()}
               size="icon"
               variant="premiumCircle"
               className=" rounded-full h-32 w-32"
+              role="new-idea-button"
             >
               <PlusCircle className="w-12 h-12" />
               {/* THIS SHOULD OPEN THE MODAL... */}
@@ -127,6 +128,7 @@ const IdeaBoard: React.FC<IdeaBoardProps> = ({
             handleEditIdea={(index, title, description) =>
               handleEditIdea(index, title, description)
             }
+            data-testid = 'idea-cards'
           />
         ))}
       </div>

@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach } from 'vitest'
 import { fireEvent, render, renderHook, screen } from '@testing-library/react'
-import userEvent  from '@testing-library/user-event'
+import userEvent from '@testing-library/user-event'
 
 import Navbar from '@/components/Navbar'
 import { ModeToggle } from '@/components/theme/theme-toggle';
@@ -163,7 +163,6 @@ describe("Testing Theme DropDown Functionality", () => {
    //type INTEGRATION ✔
    it("opens dropdown menu on click", async () => {
       const toggleButton = screen.getByRole("button", { name: "Toggle theme" });
-    
       await userEvent.click(toggleButton);
     
       const dropdownMenu = screen.getByRole("menu"); // Updated role value
@@ -173,7 +172,6 @@ describe("Testing Theme DropDown Functionality", () => {
    //type INTEGRATION ✔
    it("check dropdown menu renders with all options", async() => {
       const toggleButton = screen.getByRole("button", { name: "Toggle theme" });
-    
       await userEvent.click(toggleButton);
     
       const lightModeButton = screen.getByTestId("light-mode-button");

@@ -1,8 +1,8 @@
 import { describe, test, expect, vi, it } from 'vitest'
-import { render } from '@testing-library/react'
+import { fireEvent, render, waitFor } from '@testing-library/react'
+import userEvent  from '@testing-library/user-event'
+
 import App from "../App"
-
-
 
 describe('Checking if Vitest is functional', () => {
     //test 1 - just checking config
@@ -19,19 +19,10 @@ describe('Checking if Vitest is functional', () => {
     test('checking if "it" works with vitest', () => {
         expect(true).toBe(true)
     })
-
-    //test x - checking ability to mock LocalStorage
-
-
-    //test x - checking ability to use stubs
-
-
-    //test x - checking ability to use spies
 });
 
-
 describe('CHECK LOCAL STORAGE, on component mount - (useEffect)', () => {
-  //test UNIT-TEST ⁉⁉
+  //test UNIT-TEST
   it('should load data from LocalStorage on component mount', () => {
     /// Tear Up - Mocking LocalStorage and setting an initial value
     const storedData = [
@@ -46,45 +37,32 @@ describe('CHECK LOCAL STORAGE, on component mount - (useEffect)', () => {
     const getItemSpy = vi.spyOn(Storage.prototype, 'getItem');
     getItemSpy.mockReturnValue(JSON.stringify(storedData));
 
-    // Act: Rendering the component
+ 
     render(<App />);
 
-    // Assert: Verify that the stored data is correctly set in the component state
-    expect(getItemSpy).toHaveBeenCalledWith('ideas'); // Verify getItem was called with 'ideas'
-    expect(getItemSpy).toHaveBeenCalledTimes(1); // Verify getItem was called only once
-    // You might need to assert the component state here using your testing library utility
-    // For example, if you're using RTL, you might do something like:
-    // const ideaElement = screen.getByText('Idea 1');
-    // expect(ideaElement).toBeInTheDocument();
+    expect(getItemSpy).toHaveBeenCalledWith('ideas');   
+    expect(getItemSpy).toHaveBeenCalledTimes(1); 
 
     ///Tear Down
-    getItemSpy.mockRestore(); // Restore the original behavior of getItem
+    getItemSpy.mockRestore(); 
   });
 
-  //test UNIT-TEST ⁉
-  test('should not set data if there is no data in LocalStorage', () => {
-      // Arrange: Mocking LocalStorage to return null
+  //test UNIT-TEST 
+  test('Should not set data if there is no data in LocalStorage', () => {
       const getItemSpy = vi.spyOn(Storage.prototype, 'getItem');
       getItemSpy.mockReturnValue(null);
 
-      // Act: Rendering the component
       render(<App />);
 
-      // Assert: Verify that no data is set in the component state
-      expect(getItemSpy).toHaveBeenCalledWith('ideas'); // Verify getItem was called with 'ideas'
-      expect(getItemSpy).toHaveBeenCalledTimes(1); // Verify getItem was called only once
-      // You might need to assert that no data elements are rendered in your component
-      // For example, if you're using RTL, you might do something like:
-      // const ideaElement = screen.queryByText('Idea 1');
-      // expect(ideaElement).toBeNull();
+      expect(getItemSpy).toHaveBeenCalledWith('ideas'); 
+      expect(getItemSpy).toHaveBeenCalledTimes(1); 
 
-      // Clean up
-      getItemSpy.mockRestore(); // Restore the original behavior of getItem
+      getItemSpy.mockRestore(); 
   });
 
-  //test UNIT-TEST ⁉
+  //test UNIT-TEST 
   test("Check LocalStorage is accessable", () => {
-  
+    ///TEAR-UP
     const IdeaTestData = [
       {
         unique_key: 'Atest',
@@ -107,54 +85,63 @@ describe('CHECK LOCAL STORAGE, on component mount - (useEffect)', () => {
         created_at: '2023-08-01',
         edited_at: '',
       }
-    ]
-    
+    ];    
     localStorage.setItem("ideas", JSON.stringify(IdeaTestData))
     
+    ///WHEN
     const checkData = localStorage.getItem("ideas") as string;
     const parsedData = JSON.parse(checkData);
-
-
+    
+    ///THEN 
     expect(parsedData).toStrictEqual(IdeaTestData);
+
+    ///TEAR-DOWN
     localStorage.clear();
   });
+
 });
 
 
-
-//CRUD UNIT TESTS 
-//🎯 TODO
-describe('Testing the LocalStorage CRUD Functionality', () => {
-
-  //test 
-  test.skip("handleCreateIdea function adds an idea to state and updates localStorage", () => {
-  });
-
-
-  test.skip("Testing the 'Create-New' Idea function", () => {    
-
-  });
-
-
-  //test 
-  test.skip("Testing the 'Delete' Idea function ", () => {
-
-  });
-
-  //test 
-  test.skip("Testing the 'Edit' Idea function ", () => {
-
-  });
-
+//? Adive on the CRUD/LocalStorage UNIT TESTS 
+describe.skip('Testing the LocalStorage CRUD Functionality', () => {
+  //test TODO 
+  test("Testing the 'Create-New' Idea function", async () => {  
+    localStorage.clear();
+    const { getByRole, getByPlaceholderText, getByText, getByTestId } = render(<App />);
   
-  //test 
-  test.skip("Testing the ' ' Idea function ", () => {
+    //- create a new idea card
+    const createButton = getByRole("new-idea-button");
+    userEvent.click(createButton);
+  
+    //- update the title and description 
+    const titleInput = getByPlaceholderText('Write your title here');
+    const descriptionInput = getByPlaceholderText('Write your description here');
+    fireEvent.change(titleInput, { target: { value: 'New Idea Title' } });
+    fireEvent.change(descriptionInput, { target: { value: 'New Idea Description' } });
+    fireEvent.blur(descriptionInput);
+  
+    //- click the submit button
+    //?  Why can't it find this button??
+    const submitButton1 = getByRole("button", { name: "Save Edit" });
+    const submitButton2 = getByTestId("submit-save-button");
+    await userEvent.click(submitButton1)
+    await userEvent.click(submitButton2)
+  
+  
+    //- check that it is working
+    await waitFor(() => {
+      const newIdeaCard = getByText("New Idea Title");
+      expect(newIdeaCard).toBeInTheDocument();
+    });
+  });
+
+  //test TODO
+  test("Testing the 'Delete' Idea function ", () => {
 
   });
 
-
-  //test 
-  test.skip("Testing the ' ' Idea function ", () => {
+  //test TODO
+  test("Testing the 'Edit' Idea function ", () => {
 
   });
 
