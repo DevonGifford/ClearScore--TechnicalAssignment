@@ -1,5 +1,5 @@
 import { describe, test, expect, vi, it } from 'vitest'
-import { fireEvent, render, waitFor } from '@testing-library/react'
+import { screen, fireEvent, render, waitFor } from '@testing-library/react'
 import userEvent  from '@testing-library/user-event'
 
 import App from "../App"
@@ -36,9 +36,10 @@ describe('CHECK LOCAL STORAGE, on component mount - (useEffect)', () => {
     ];
     const getItemSpy = vi.spyOn(Storage.prototype, 'getItem');
     getItemSpy.mockReturnValue(JSON.stringify(storedData));
-
  
     render(<App />);
+
+    expect(screen.getByText(storedData[0].title)).toBeInTheDocument()
 
     expect(getItemSpy).toHaveBeenCalledWith('ideas');   
     expect(getItemSpy).toHaveBeenCalledTimes(1); 
@@ -105,17 +106,18 @@ describe('CHECK LOCAL STORAGE, on component mount - (useEffect)', () => {
 //? Adive on the CRUD/LocalStorage UNIT TESTS 
 describe.skip('Testing the LocalStorage CRUD Functionality', () => {
   //test TODO 
-  test("Testing the 'Create-New' Idea function", async () => {  
+  test.skip("Testing the 'Create-New' Idea function", async () => {  
     localStorage.clear();
     const { getByRole, getByPlaceholderText, getByText, getByTestId } = render(<App />);
   
     //- create a new idea card
-    const createButton = getByRole("new-idea-button");
+    const createButton = getByTestId('create idea');
     userEvent.click(createButton);
   
     //- update the title and description 
     const titleInput = getByPlaceholderText('Write your title here');
     const descriptionInput = getByPlaceholderText('Write your description here');
+
     fireEvent.change(titleInput, { target: { value: 'New Idea Title' } });
     fireEvent.change(descriptionInput, { target: { value: 'New Idea Description' } });
     fireEvent.blur(descriptionInput);

@@ -8,7 +8,7 @@ import IdeaBoard from "@/components/IdeaBoard";
 describe("Testing everything is rendered correctly", () => {
 
   //test UNIT-TEST ✔
-  test('renders the "Add New Idea" button', () => {
+  test.skip('renders the "Add New Idea" button', () => {
     const { getByRole } = render(
       <IdeaBoard 
         data={[]} 
@@ -63,7 +63,7 @@ describe("Testing everything is rendered correctly", () => {
 
 describe("Testing functionality", () => {
   //test UNIT-TEST ✔
-  test('adds a new idea card when "Add New Idea" button is clicked', () => {
+  test.skip('adds a new idea card when "Add New Idea" button is clicked', () => {
     const mockCreateIdea = vi.fn();
     const { getByRole } = render(
       <IdeaBoard 

@@ -64,6 +64,8 @@ const IdeaBoard: React.FC<IdeaBoardProps> = ({
   };
   const sortedIdeaData = sortedData(data, sortType); 
 
+  console.log('BYYYEEEEEE', data)
+
   return (
     <>
       {/* SORTING DROPDOWN */}
@@ -107,7 +109,9 @@ const IdeaBoard: React.FC<IdeaBoardProps> = ({
               size="icon"
               variant="premiumCircle"
               className=" rounded-full h-32 w-32"
-              role="new-idea-button"
+              type="button"
+              name="create idea"
+              data-testid="create idea"
             >
               <PlusCircle className="w-12 h-12" />
               {/* THIS SHOULD OPEN THE MODAL... */}

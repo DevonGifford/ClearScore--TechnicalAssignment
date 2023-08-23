@@ -45,6 +45,8 @@ const IdeaCard: React.FC<CardProps> = ({
     setEditsMade(false);
   };
 
+  console.log('HELOOOOOOOOOOOOOOO', editsMade)
+
   return (
     <div className=" h-90 min-h-fit w-64 px-3 py-3 border-b border-primary/10 bg-secondary transition duration-400 hover:scale-110 hover:bg-secondary/80 flex flex-col rounded-lg">
       {/* HEADER */}

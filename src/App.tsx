@@ -13,6 +13,8 @@ interface Idea {
 
 function App() {
   const [data, setData] = useState<Idea[]>([]);
+
+  console.log('app data state', data)
   //✅ READ-IDEA local storage on component mount
   useEffect(() => {
     const storedData = localStorage.getItem("ideas");
