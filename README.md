@@ -29,7 +29,7 @@ Tech Used in this Project
 
 <!-- Logo -->
 <div align=center>
-    <img src="/src/assets/fullpage.png" alt="Demo" title="DemoImage" width="500" height="300">     
+    <img src="/src/assets/IdeaBankDemo.png" alt="Demo" title="DemoImage" width="500" height="700">     
    
 </div>
 
@@ -132,11 +132,9 @@ You can learn more about the task requirements here:<br>
 
 ✅ A detailed README explaining assumptions / decisions
 
-💨 Clean, concise code <br>
-_room for improvement in this regard ..._
+✅ Clean, concise code <br>
 
-❌ Jest + Vitest for testing <br/>
-_coming soon ..._
+✅ Vitest & RTL for testing <br/>
 
 ❌ MEN (Mongo, Express, Node) stack websites <br>
 _This proof of concept doesn't have a dedicated backend..._
@@ -167,7 +165,7 @@ _This app uses vite and thus uses vite's own ezbuild bundler/builder ..._
 
 💥 Submit and Delete funcitonality needs to use an optomistic ui as apart from making new api call
 
-💥 Functionality to revert changes if user clicks off editing an idea card
+💥 Functionality required to revert changes if user clicks off editing an idea card
 
 💥 Editing cards while data is sorted causing problem with character counter
 
@@ -245,9 +243,13 @@ Copy code
 
 <!-- -------------------------------------------------------------------------- -->
 
-<h1 align='center'> Development Thought-Process 💭</h1>
+<h1 align='left'> Development Thought-Process 💭</h1>
 
 <!-- -------------------------------------------------------------------------- -->
+
+<details>
+<summary> Click here to expand </summary>
+<br/>
 
 ## <font color=EEE8AA>`App.tsx`</font>
 
@@ -309,7 +311,7 @@ _Fox example I could have the filter/sort functionality into it's own `<Dropdown
 
 ### <font color=#d48d57>Overall Accessibility</font>
 
-As this is just a proof of concept I did not really focus on developing with accessibility in mind.
+As this is just a proof of concept I did not really focus on developing with accessibility in mind.  During the testing I did catch the obvious errors however there is still room for imporvemetn in this regard
 
 _For example. some things I would take into consideration across the entire app would be:_
 
@@ -400,3 +402,32 @@ I wanted to create a method for the code-reviewer to create a way to generate a 
 </details>
 
 <br>
+
+<!-- CLOSING DIV -->
+</details>
+
+<br><br>
+
+
+
+<!-- -------------------------------------------------------------------------- -->
+
+<h1 align='left'> Testing Results 🧪</h1>
+
+<!-- -------------------------------------------------------------------------- -->
+
+
+<details>
+<summary> Click here to expand </summary>
+<br/>
+
+
+<div align=center>
+    <img src="/src/assets/IdeaBoardTesting.png" alt="Demo" title="DemoImage" width="600" height="900">     
+   
+</div>
+
+<!-- CLOSING DIV -->
+</details>
+
+<br><br>

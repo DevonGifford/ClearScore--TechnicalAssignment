@@ -75,6 +75,7 @@ describe("Testing ThemeProvider and Theme Functionality", () => {
    });
  });
  
+
 describe("Testing the useTheme Hook", () => {
    //test UNIT-TEST ✔
    it("returns the correct theme and setTheme function", () => {
