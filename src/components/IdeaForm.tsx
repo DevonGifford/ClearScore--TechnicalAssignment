@@ -66,7 +66,7 @@ const IdeaForm = ({ closeFormModal, handleCreateIdea }: IdeaFormProps) => {
               type="text"
               id="title"
               className=" bg-slate-300 text-black text-xs sm:text-sm rounded-lg block w-full p-2.5"
-              placeholder="Write your title here"
+              placeholder="Your title goes here"
               {...register("title")}
             />
             {errors.title && (
@@ -86,7 +86,7 @@ const IdeaForm = ({ closeFormModal, handleCreateIdea }: IdeaFormProps) => {
               type="text"
               id="description"
               className=" bg-slate-300 text-black text-xs sm:text-sm rounded-lg block w-full p-2.5 h-24 whitespace-pre-wrap"
-              placeholder="Write your description here"
+              placeholder="Your description goes here"
               {...register("description")}
             />
             {errors.description && (<span className="text-xs text-center md:text-base text-red-800 block mt-1">{errors.description?.message}</span>)}
