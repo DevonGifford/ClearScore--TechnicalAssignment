@@ -36,10 +36,12 @@ const Navbar: React.FC<NavBarProps> = ({ handleCreateIdea }) => {
           >
             <CopyPlus className="h-5 w-5 mr-2" /> NEW IDEA
           </Button>
-          <ModeToggle />
+          <div role="themeButton">
+            <ModeToggle />  
+          </div>
         </div>
       </div>
-      <NewIdeaModal open={open} onClose={() => setOpen(false)}>
+      <NewIdeaModal open={open} onClose={() => setOpen(false)} >
         <IdeaForm
           closeFormModal={closeNewIdeaModal}
           handleCreateIdea={handleCreateIdea}

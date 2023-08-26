@@ -10,7 +10,7 @@ import { Progress } from "./ui/progress";
 
 type FormSchemaType = z.infer<typeof formSchema>;
 
-interface CardProps {
+export interface CardProps {
   created: string;
   edited: string;
   title: string;
@@ -45,12 +45,14 @@ const IdeaCard: React.FC<CardProps> = ({
     setEditsMade(false);
   };
 
+  console.log('HELOOOOOOOOOOOOOOO', editsMade)
+
   return (
     <div className=" h-90 min-h-fit w-64 px-3 py-3 border-b border-primary/10 bg-secondary transition duration-400 hover:scale-110 hover:bg-secondary/80 flex flex-col rounded-lg">
       {/* HEADER */}
       <div className="w-full flex justify-between ">
         {/* DATE */}
-        <div className="text-xs font-bold text-gray-500">
+        <div role="time-stamp" className="text-xs font-bold text-gray-500">
           {edited !== "" ? <p>Edited: {edited}</p> : <p>Created: {created}</p>}
         </div>
         {/* DELETE */}
@@ -60,6 +62,7 @@ const IdeaCard: React.FC<CardProps> = ({
             size={"icon"}
             className="h-6 w-6 "
             onClick={handleDeleteIdea}
+            role="delete-button"
           >
             <Trash2 size={14} />
           </Button>
@@ -69,11 +72,13 @@ const IdeaCard: React.FC<CardProps> = ({
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col justify-center"
+        role="form"
       >
         {/* TITLE */}
         <div className="border-b-2 border-primary p-2 text-lg font-semibold text-center">
           <textarea
             id="title"
+            data-testid="idea-card-title"
             className="bg-secondary text-center w-full resize-none overflow-hidden hover:overflow-auto"
             placeholder="Write your title here"
             defaultValue={title}
@@ -86,6 +91,7 @@ const IdeaCard: React.FC<CardProps> = ({
         <div className="h-min-[7rem] text-base pt-1 text-center">
           <textarea
             id="description"
+            data-testid="idea-card-description"
             className="bg-secondary text-center w-full p-2.5 h-44 whitespace-pre-wrap resize-none overflow-hidden hover:overflow-auto"
             placeholder="Write your description here"
             defaultValue={description}
@@ -101,8 +107,8 @@ const IdeaCard: React.FC<CardProps> = ({
         {/* CHARACTER COUNTER */}
         {editsMade && ( //-Only show the character counter if edits have been made
           <div>
-            <Progress className=" w-full" value={(charCount / 140) * 100} />{" "}
-            <div className="flex justify-end text-xs font-bold text-gray-500">
+            <Progress role="progress-bar" className=" w-full" value={(charCount / 140) * 100} />{" "}
+            <div role="char-countdown" className="flex justify-end text-xs font-bold text-gray-500">
               {charCount !== 0 ? (
                 <span>{140 - charCount}</span>
               ) : (
@@ -115,6 +121,8 @@ const IdeaCard: React.FC<CardProps> = ({
         <div className="flex justify-center pt-1">
           {editsMade && ( //- Only show the submit button if edits have been made
             <Button
+              data-testid="submit-save-button"
+              role="button"
               type="submit"
               variant="premium"
               className="w-32 justify-center"
