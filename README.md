@@ -29,7 +29,7 @@ Tech Used in this Project
 
 <!-- Logo -->
 <div align=center>
-    <img src="/src/assets/fullpage.png" alt="Demo" title="DemoImage" width="590" height="300">     
+    <img src="/src/assets/IdeaBankDemo.png" alt="Demo" title="DemoImage" width="500" height="700">     
    
 </div>
 
@@ -423,7 +423,7 @@ I wanted to create a method for the code-reviewer to create a way to generate a 
 
 
 <div align=center>
-    <img src="/src/assets/IdeaBoardTesting.png" alt="Demo" title="DemoImage" width="500" height="900">     
+    <img src="/src/assets/IdeaBoardTesting.png" alt="Demo" title="DemoImage" width="600" height="900">     
    
 </div>
 
